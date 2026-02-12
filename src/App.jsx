@@ -36,7 +36,7 @@ import {
   List,
   Key,
   MessageSquare,
-  Shield, Home
+  Shield, Home, ChevronDown, ChevronUp
 } from 'lucide-react';
 
 export default function KiwiTradingPostTestTracker() {
