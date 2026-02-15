@@ -1064,17 +1064,22 @@ export default function KiwiTradingPostTestTracker() {
                   <label className="block text-sm font-medium text-slate-700 mb-2">
                     Test Scenario {testScenarios[newTest.module] && '(select or type custom)'}
                   </label>
+                  {/* Use an input with datalist so user can pick a predefined scenario or type a custom one */}
                   {testScenarios[newTest.module] ? (
-                    <select
-                      value={newTest.scenario}
-                      onChange={(e) => setNewTest({ ...newTest, scenario: e.target.value })}
-                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
-                    >
-                      <option value="">-- Select from {testScenarios[newTest.module].length} scenarios --</option>
-                      {testScenarios[newTest.module].map((scenario, idx) => (
-                        <option key={idx} value={scenario}>{scenario}</option>
-                      ))}
-                    </select>
+                    <>
+                      <input
+                        list={`scenario-list-${newTest.module}`}
+                        placeholder="Select or type a scenario"
+                        value={newTest.scenario}
+                        onChange={(e) => setNewTest({ ...newTest, scenario: e.target.value })}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
+                      />
+                      <datalist id={`scenario-list-${newTest.module}`}>
+                        {testScenarios[newTest.module].map((scenario, idx) => (
+                          <option key={idx} value={scenario} />
+                        ))}
+                      </datalist>
+                    </>
                   ) : (
                     <input
                       type="text"
